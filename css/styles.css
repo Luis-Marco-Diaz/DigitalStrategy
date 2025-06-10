@@ -58,7 +58,7 @@ a:hover {
     background-position:50% 50%\9 !important;
 }
 .overlay {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
     position: relative;
     width: 100%;
     height: 100%;
@@ -163,7 +163,7 @@ a:hover {
 	width: 250px;
 	height: 400px;
 	box-sizing: border-box;
-	background-image: url(/assets/images/Marketing.png);
+	background-image: url(/assets/images/1.png);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -176,7 +176,7 @@ a:hover {
 .superbtn1:hover{
 	transform: scale(1.1);
 	animation: ease-in-out;
-	background-image: url(/assets/images/Card-Header.png);
+	background-image: url(/assets/images/2.png);
 }
 .superbtn2{
 	display: flex;
@@ -184,7 +184,7 @@ a:hover {
 	width: 250px;
 	height: 400px;
 	box-sizing: border-box;
-	background-image: url(/assets/images/WebDevelopment1.png);
+	background-image: url(/assets/images/3.png);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -197,7 +197,7 @@ a:hover {
 .superbtn2:hover{
 	transform: scale(1.1);
 	animation: ease-in-out;
-	background-image: url(/assets/images/WebDevelopment2.png);
+	background-image: url(/assets/images/4.png);
 }
 .superbtn3{
 	display: flex;
@@ -205,7 +205,7 @@ a:hover {
 	width: 250px;
 	height: 400px;
 	box-sizing: border-box;
-	background-image: url(/assets/images/card-header-3-2.png);
+	background-image: url(/assets/images/5.png);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -218,7 +218,7 @@ a:hover {
 .superbtn3:hover{
 	transform: scale(1.1);
 	animation: ease-in-out;
-	background-image: url(/assets/images/card-header-3.png);
+	background-image: url(/assets/images/6.png);
 }
 .superbtn4{
 	display: flex;
@@ -226,7 +226,7 @@ a:hover {
 	width: 250px;
 	height: 400px;
 	box-sizing: border-box;
-	background-image: url(/assets/images/cadr-4.png);
+	background-image: url(/assets/images/7.png);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -239,7 +239,7 @@ a:hover {
 .superbtn4:hover{
 	transform: scale(1.1);
 	animation: ease-in-out;
-	background-image: url(/assets/images/card-4-1.png);
+	background-image: url(/assets/images/8.png);
 }
 
 
