@@ -258,6 +258,27 @@ a:hover {
 .pb-5 {
 	padding-bottom: 5rem;
 }
+.lineawesome{
+	background-image: linear-gradient(to right, #ac0b0b 0%, #570404 100%);
+	color: white;
+	padding: 2px 15px ;
+	border-radius: 10px;
+	font-size: 14px;
+}
+.lineawesome2{
+	background-image: linear-gradient(to right, #775f00 0%, #3a3001 100%);
+	color: white;
+	padding: 2px 15px ;
+	border-radius: 10px;
+	font-size: 14px;
+}
+.lineawesome3{
+	background-image: linear-gradient(to right, #2c0457 0%, #012a70 100%);
+	color: white;
+	padding: 2px 15px ;
+	border-radius: 10px;
+	font-size: 14px;
+}
 .inline-flex{
 	display: flex;
 	flex-direction: row;
