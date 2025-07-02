@@ -82,6 +82,7 @@
 					<li><a href="#results">EXPERTISE</a></li>
 					<li><a href="#clients">CLIENTES</a></li>
 					<li><a href="#services">PROYECTOS</a></li>
+					<li><a href="/conocer/conocer.html">CERTIFICACIONES</a></li>
 					<li><a href="#about-us">NOSOTROS</a></li> 				
 					<li><a href="#contact">CONTACTO</a></li>
 				</ul>
@@ -119,7 +120,7 @@
 			<div class="col-lg-3 wow fadeInRight card">
 				<h3 class="card-header" >Cursos con Certificación Oficial</h2>
 				<div  style="display: flex; justify-content: center;" >
-						<div class="superbtn4"></div>
+						<a href="/conocer/conocer.html" target="_blank" class="superbtn4"></a>
 					</div>
 					<p>Como Agentes Capacitadores Externos ante la SEP - CONOCER, Capacitamos, Evaluamos y Certificamos a la población Mexicana en temas de Mercadotecnia, Diseño Web, Negocios y Ventas.
 				</p>
@@ -331,15 +332,15 @@
 					</div>
 					 
 					<div class="col-sm-7 contact-right">
-						<form method="POST" id="contact-form" class="form-horizontal" action="contactengine.php" onSubmit="alert('Thank you for your feedback!');">
+						<form id="contact-form" class="form-horizontal" action="https://formspree.io/f/manovyep" method="POST">
 							<div class="form-group">
-							<input type="text" name="Name" id="Name" class="form-control wow fadeInUp" placeholder="Nombre" required/>
+							<input type="text" name="name" id="name" class="form-control wow fadeInUp" placeholder="Nombre" required/>
 							</div>
 							<div class="form-group">
 							<input type="phone" name="phone" id="phone" class="form-control wow fadeInUp" placeholder="Teléfono" required/>
 							</div>	
 							<div class="form-group">
-							<input type="text" name="Email" id="Email" class="form-control wow fadeInUp" placeholder="Correo" required/>
+							<input type="email" name="Email" id="Email" class="form-control wow fadeInUp" placeholder="Correo" required/>
 							</div>					
 							<div class="form-group">
 							<textarea name="Message" rows="20" cols="20" id="Message" class="form-control input-message wow fadeInUp"  placeholder="Escribe tu mensaje" required></textarea>
