@@ -1,11 +1,12 @@
 <?php
 
-$EmailFrom = "admin@yoursite.com";
-$EmailTo = "your@yoursite.com";
+$EmailFrom = "contacto@disuenads.com.mx";
+$EmailTo = "lmdiaz@disuenads.com.mx";
 $Subject = "Message from your site";
 $Name = Trim(stripslashes($_POST['Name'])); 
-$Email = Trim(stripslashes($_POST['Email'])); 
-$Message = Trim(stripslashes($_POST['Message'])); 
+$Email = Trim(stripslashes($_POST['Email']));
+$phone = Trim(stripslashes($_POST['phone']));
+$Message = Trim(stripslashes($_POST['Message']));
 
 // validation
 $validationOK=true;
@@ -18,6 +19,9 @@ if (!$validationOK) {
 $Body = "";
 $Body .= "Name: ";
 $Body .= $Name;
+$Body .= "\n";
+$Body .= "Phone: ";
+$Body .= $phone;
 $Body .= "\n";
 $Body .= "Email: ";
 $Body .= $Email;
