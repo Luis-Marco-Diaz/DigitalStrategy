@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diagnóstico de Negocio y Marketing Digital</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body { background: #0f172a; }
+    .navbar { background: #1b0a7d; }
+    .card { border: none; border-radius: 1rem; }
+    .card-header { background: transparent; }
+    .section-title { color: #000000; }
+    .text-muted-2 { color: #404040; }
+    .progress { height: 8px; }
+    .required::after { content: " *"; color: #ef4444; }
+    .badge-soft { background: rgba(99,102,241,.15); color: #0015d5; }
+    .form-hint { font-size: .875rem; color: #94a3b8; }
+    .sticky-actions { position: sticky; bottom: 0; z-index: 10; background: rgba(15,23,42,.8); backdrop-filter: blur(6px); }
+  </style>
+</head>
+<body class="text-light">
+  <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+    <div class="container py-2">
+      <a class="navbar-brand fw-semibold" href="#">
+        <i class="bi bi-graph-up-arrow me-2"></i> Diagnóstico de Negocio & Marketing Digital - Marco Díaz
+      </a>
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge rounded-pill text-bg-secondary">v1.0</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+    <div class="row g-4">
+      <div class="col-12 col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h1 class="h4 mb-0 section-title">Formulario de Diagnóstico</h1>
+              <span class="badge    badge-soft">Tiempo de llenado: 8–12 min</span>
+            </div>
+            <div class="progress mb-4">
+              <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+            <form id="diagnosticForm" class="needs-validation" novalidate action="https://formspree.io/f/mzzajjvj"
+  method="POST"  >
+              <!-- Sección 0: Datos de contacto -->
+              <div class="mb-4">
+                <h2 class="h5 section-title mb-3">Datos de contacto</h2>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label required" for="empresa">Empresa</label>
+                    <input type="text" id="empresa" name="empresa" class="form-control" required>
+                    <div class="invalid-feedback">Indica el nombre de la empresa.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label required" for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label required" for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="nombre@empresa.com" required>
+                    <div class="invalid-feedback">Proporciona un email válido.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="+52 55 0000 0000">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="pais">País / Región</label>
+                    <input type="text" id="pais" name="pais" class="form-control" placeholder="México">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="sitio">Sitio web</label>
+                    <input type="url" id="sitio" name="sitio" class="form-control" placeholder="https://">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="sector">Sector</label>
+                    <select id="sector" name="sector" class="form-select">
+                      <option value="">Selecciona…</option>
+                      <option>Servicios profesionales</option>
+                      <option>Comercio minorista</option>
+                      <option>Comercio mayorista</option>
+                      <option>Tecnología</option>
+                      <option>Bienes raíces</option>
+                      <option>Educación</option>
+                      <option>Turismo</option>
+                      <option>Otro</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="tamano">Tamaño de la empresa</label>
+                    <select id="tamano" name="tamano" class="form-select">
+                      <option value="">Selecciona…</option>
+                      <option>Micro (1–10)</option>
+                      <option>Pequeña (11–50)</option>
+                      <option>Mediana (51–250)</option>
+                      <option>Grande (250+)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="ticketPromedio">Ticket promedio (MXN)</label>
+                    <input type="number" min="0" step="0.01" id="ticketPromedio" name="ticketPromedio" class="form-control" placeholder="Ej. 2500">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="cicloVenta">Ciclo de venta</label>
+                    <select id="cicloVenta" name="cicloVenta" class="form-select">
+                      <option value="">Selecciona…</option>
+                      <option>Menos de 1 semana</option>
+                      <option>1–4 semanas</option>
+                      <option>1–3 meses</option>
+                      <option>3–6 meses</option>
+                      <option>6+ meses</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="border-secondary-subtle" />
+
+              <!-- Sección 1: Modelo de Negocio Digital -->
+              <div class="mb-4">
+                <h2 class="h5 section-title mb-3">1) Modelo de Negocio Digital</h2>
+                <div class="mb-3">
+                  <label class="form-label required" for="descripcionModelo">Describe brevemente tu modelo de negocio</label>
+                  <textarea id="descripcionModelo" name="descripcionModelo" class="form-control" rows="3" required></textarea>
+                  <div class="invalid-feedback">Este campo es necesario para comprender el contexto.</div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label required">Tipo de cliente principal</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="tipoCliente" id="b2b" value="B2B" required>
+                      <label class="form-check-label" for="b2b">B2B</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="tipoCliente" id="b2c" value="B2C" required>
+                      <label class="form-check-label" for="b2c">B2C</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="tipoCliente" id="ambos" value="Ambos" required>
+                      <label class="form-check-label" for="ambos">Ambos</label>
+                    </div>
+                  </div>
+                  <div class="form-hint mt-1">Selecciona una opción.</div>
+                </div>
+                <div class="row g-3 align-items-center">
+                  <div class="col-md-6">
+                    <label for="ventasDigitales" class="form-label">% de ventas generadas por canales digitales</label>
+                    <input type="range" class="form-range" min="0" max="100" step="1" id="ventasDigitales" name="ventasDigitales" value="0">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="number" class="form-control" id="ventasDigitalesNum" min="0" max="100" step="1" value="0" aria-label="Porcentaje exacto">
+                  </div>
+                  <div class="col-md-4 text-muted-2">
+                    <small>Mueve el control o escribe el porcentaje.</small>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <label for="nivelDigital" class="form-label">Nivel de digitalización (1 bajo – 5 alto)</label>
+                  <input type="range" class="form-range" min="1" max="5" step="1" id="nivelDigital" name="nivelDigital" value="3">
+                </div>
+                <div class="row g-3 mt-1">
+                  <div class="col-md-6">
+                    <label class="form-label required" for="buyerPersona">¿Tienes Buyer Persona definido?</label>
+                    <select id="buyerPersona" name="buyerPersona" class="form-select" required>
+                      <option value="">Selecciona…</option>
+                      <option>Sí</option>
+                      <option>No</option>
+                      <option>Parcial</option>
+                    </select>
+                    <div class="invalid-feedback">Selecciona una opción.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="procesos">Procesos definidos</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="Captación" id="procCaptacion" name="procesos">
+                      <label class="form-check-label" for="procCaptacion">Captación</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="Retención" id="procRetencion" name="procesos">
+                      <label class="form-check-label" for="procRetencion">Retención</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="Fidelización" id="procFidel" name="procesos">
+                      <label class="form-check-label" for="procFidel">Fidelización</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="border-secondary-subtle" />
+
+              <!-- Sección 2: Estrategia y Acciones -->
+              <div class="mb-4">
+                <h2 class="h5 section-title mb-3">2) Estrategia y Acciones de Marketing Digital</h2>
+
+                <div class="mb-3">
+                  <label class="form-label required">Canales utilizados</label>
+                  <div class="row row-cols-1 row-cols-md-2 g-2">
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Sitio web" id="canalWeb" name="canales"><label class="form-check-label" for="canalWeb">Sitio web</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Redes sociales" id="canalRRSS" name="canales"><label class="form-check-label" for="canalRRSS">Redes sociales</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Email marketing" id="canalEmail" name="canales"><label class="form-check-label" for="canalEmail">Email marketing</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Publicidad pagada" id="canalAds" name="canales"><label class="form-check-label" for="canalAds">Publicidad pagada</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Marketplaces" id="canalMarket" name="canales"><label class="form-check-label" for="canalMarket">Marketplaces</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="WhatsApp Business" id="canalWA" name="canales"><label class="form-check-label" for="canalWA">WhatsApp Business</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Otro" id="canalOtro" name="canales"><label class="form-check-label" for="canalOtro">Otro</label></div></div>
+                  </div>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label required" for="estrategiaContenidos">¿Tienes estrategia de contenidos?</label>
+                    <select id="estrategiaContenidos" name="estrategiaContenidos" class="form-select" required>
+                      <option value="">Selecciona…</option>
+                      <option>Sí</option>
+                      <option>No</option>
+                      <option>En proceso</option>
+                    </select>
+                    <div class="invalid-feedback">Selecciona una opción.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="frecuencia">Frecuencia de publicación</label>
+                    <select id="frecuencia" name="frecuencia" class="form-select">
+                      <option value="">Selecciona…</option>
+                      <option>Diaria</option>
+                      <option>Semanal</option>
+                      <option>Quincenal</option>
+                      <option>Mensual</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mt-3">
+                  <label class="form-label required" for="invierteAds">¿Has invertido en anuncios pagados?</label>
+                  <select id="invierteAds" name="invierteAds" class="form-select" required>
+                    <option value="">Selecciona…</option>
+                    <option>Sí</option>
+                    <option>No</option>
+                  </select>
+                  <div class="invalid-feedback">Indica si has invertido en anuncios.</div>
+                </div>
+
+                <div id="adsBlock" class="mt-3 collapse">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label" for="plataformasAds">Plataformas usadas</label>
+                      <select id="plataformasAds" name="plataformasAds" class="form-select" multiple>
+                        <option>Meta Ads</option>
+                        <option>Google Ads</option>
+                        <option>LinkedIn Ads</option>
+                        <option>TikTok Ads</option>
+                        <option>X Ads</option>
+                        <option>Otro</option>
+                      </select>
+                      <div class="form-hint">Mantén presionada Ctrl/Cmd para seleccionar varias.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="inversionMensual">Inversión mensual estimada (MXN)</label>
+                      <input type="number" min="0" step="0.01" id="inversionMensual" name="inversionMensual" class="form-control" placeholder="Ej. 15000">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="roas">ROAS promedio (ingresos / gasto)</label>
+                      <input type="number" min="0" step="0.01" id="roas" name="roas" class="form-control" placeholder="Ej. 3.5">
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label" for="resultadosAds">Resultados / aprendizajes</label>
+                      <textarea id="resultadosAds" name="resultadosAds" class="form-control" rows="2" placeholder="Cuéntanos brevemente qué funcionó y qué no."></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-3">
+                  <label class="form-label">Herramientas de medición / CRM</label>
+                  <div class="row row-cols-1 row-cols-md-2 g-2">
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Google Analytics" id="ga4" name="herramientas"><label class="form-check-label" for="ga4">Google Analytics</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Google Tag Manager" id="gtm" name="herramientas"><label class="form-check-label" for="gtm">Google Tag Manager</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Search Console" id="gsc" name="herramientas"><label class="form-check-label" for="gsc">Search Console</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="HubSpot" id="hubspot" name="herramientas"><label class="form-check-label" for="hubspot">HubSpot</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Zoho" id="zoho" name="herramientas"><label class="form-check-label" for="zoho">Zoho</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Otro" id="crmOtro" name="herramientas"><label class="form-check-label" for="crmOtro">Otro</label></div></div>
+                  </div>
+                </div>
+
+                <div class="mt-3">
+                  <label class="form-label" for="satisfaccion">Satisfacción con resultados actuales (1–5)</label>
+                  <input type="range" class="form-range" min="1" max="5" step="1" id="satisfaccion" name="satisfaccion" value="3">
+                </div>
+              </div>
+
+              <hr class="border-secondary-subtle" />
+
+              <!-- Sección 3: Presupuesto y Costos -->
+              <div class="mb-4">
+                <h2 class="h5 section-title mb-3">3) Presupuesto y Determinación de Costos</h2>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label required" for="presupuesto">¿Asignas presupuesto específico a marketing digital?</label>
+                    <select id="presupuesto" name="presupuesto" class="form-select" required>
+                      <option value="">Selecciona…</option>
+                      <option>Sí</option>
+                      <option>No</option>
+                    </select>
+                    <div class="invalid-feedback">Responde esta pregunta.</div>
+                  </div>
+                  <div class="col-md-6 collapse" id="presupuestoDetalle">
+                    <label class="form-label" for="porcentajeIngresos">% de ingresos destinados a marketing</label>
+                    <div class="input-group">
+                      <input type="number" min="0" max="100" step="0.1" id="porcentajeIngresos" name="porcentajeIngresos" class="form-control" placeholder="Ej. 8">
+                      <span class="input-group-text">%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-3">
+                  <label class="form-label">Distribución del presupuesto</label>
+                  <div class="row g-2 align-items-end">
+                    <div class="col-12 col-md-3">
+                      <label class="form-label" for="distAds">Publicidad pagada</label>
+                      <div class="input-group"><input type="number" min="0" max="100" step="1" id="distAds" class="form-control dist" placeholder="%"><span class="input-group-text">%</span></div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label class="form-label" for="distContenido">Creación de contenido</label>
+                      <div class="input-group"><input type="number" min="0" max="100" step="1" id="distContenido" class="form-control dist" placeholder="%"><span class="input-group-text">%</span></div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label class="form-label" for="distHerr">Herramientas</label>
+                      <div class="input-group"><input type="number" min="0" max="100" step="1" id="distHerr" class="form-control dist" placeholder="%"><span class="input-group-text">%</span></div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label class="form-label" for="distEquipo">Equipo interno/externo</label>
+                      <div class="input-group"><input type="number" min="0" max="100" step="1" id="distEquipo" class="form-control dist" placeholder="%"><span class="input-group-text">%</span></div>
+                    </div>
+                    <div class="col-12">
+                      <div id="distAlert" class="form-text text-warning d-none">La suma debe ser 100%.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row g-3 mt-1">
+                  <div class="col-md-4">
+                    <label class="form-label" for="cacConoce">¿Conoces tu CAC?</label>
+                    <select id="cacConoce" name="cacConoce" class="form-select">
+                      <option value="">Selecciona…</option>
+                      <option>Sí</option>
+                      <option>No</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label" for="cac">CAC (MXN por cliente)</label>
+                    <input type="number" min="0" step="0.01" id="cac" name="cac" class="form-control" placeholder="Ej. 420.50">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label" for="ltv">LTV (MXN por cliente)</label>
+                    <input type="number" min="0" step="0.01" id="ltv" name="ltv" class="form-control" placeholder="Ej. 5600">
+                  </div>
+                </div>
+                <div class="row g-3 mt-1">
+                  <div class="col-md-4">
+                    <label class="form-label" for="margenBruto">Margen bruto estimado</label>
+                    <div class="input-group">
+                      <input type="number" min="0" max="100" step="0.1" id="margenBruto" name="margenBruto" class="form-control" placeholder="Ej. 45">
+                      <span class="input-group-text">%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="border-secondary-subtle" />
+
+              <!-- Sección 4: Métricas y KPIs -->
+              <div class="mb-4">
+                <h2 class="h5 section-title mb-3">4) Métricas y KPIs</h2>
+                <div class="mb-2">
+                  <label class="form-label">Indicadores que revisas actualmente</label>
+                  <div class="row row-cols-1 row-cols-md-2 g-2">
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Alcance" id="kpiAlcance" name="kpis"><label class="form-check-label" for="kpiAlcance">Alcance</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Leads" id="kpiLeads" name="kpis"><label class="form-check-label" for="kpiLeads">Leads</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Conversión" id="kpiConversion" name="kpis"><label class="form-check-label" for="kpiConversion">Conversión</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Ventas" id="kpiVentas" name="kpis"><label class="form-check-label" for="kpiVentas">Ventas</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="ROI/ROAS" id="kpiRoi" name="kpis"><label class="form-check-label" for="kpiRoi">ROI/ROAS</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="Retención/Churn" id="kpiRetencion" name="kpis"><label class="form-check-label" for="kpiRetencion">Retención/Churn</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="CAC" id="kpiCAC" name="kpis"><label class="form-check-label" for="kpiCAC">CAC</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" value="LTV" id="kpiLTV" name="kpis"><label class="form-check-label" for="kpiLTV">LTV</label></div></div>
+                  </div>
+                </div>
+                <div class="row g-3 mt-1">
+                  <div class="col-md-6">
+                    <label class="form-label required" for="freqKpi">Frecuencia de seguimiento</label>
+                    <select id="freqKpi" name="freqKpi" class="form-select" required>
+                      <option value="">Selecciona…</option>
+                      <option>Semanal</option>
+                      <option>Mensual</option>
+                      <option>Trimestral</option>
+                      <option>Nunca</option>
+                    </select>
+                    <div class="invalid-feedback">Selecciona una opción.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label required" for="reportes">¿Cuentas con reportes formales?</label>
+                    <select id="reportes" name="reportes" class="form-select" required>
+                      <option value="">Selecciona…</option>
+                      <option>Sí</option>
+                      <option>No</option>
+                    </select>
+                    <div class="invalid-feedback">Responde esta pregunta.</div>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <label class="form-label" for="claridadKpi">Claridad sobre KPIs relevantes (1–5)</label>
+                  <input type="range" class="form-range" min="1" max="5" step="1" id="claridadKpi" name="claridadKpi" value="3">
+                </div>
+              </div>
+
+              <hr class="border-secondary-subtle" />
+
+              <!-- Sección final: Observaciones -->
+              <div class="mb-4">
+                <h2 class="h5 section-title mb-3">Observaciones / Retos / Expectativas</h2>
+                <textarea id="observaciones" name="observaciones" class="form-control" rows="4" placeholder="Cuéntanos tus principales retos, metas y expectativas"></textarea>
+              </div>
+
+              <!-- Acciones -->
+              <div class="sticky-actions pt-3">
+                <div class="card bg-transparent">
+                  <div class="card-body d-flex flex-wrap gap-2 justify-content-between align-items-center">
+                    <div class="d-flex gap-2">
+                      <button type="button" id="btnGuardar" class="btn btn-outline-light"><i class="bi bi-save me-2"></i>Guardar borrador</button>
+                      <button type="button" id="btnLimpiar" class="btn btn-outline-warning"><i class="bi bi-eraser me-2"></i>Limpiar</button>
+                      
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-send me-2"></i>Enviar</button>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body p-4">
+            <h2 class="h5 section-title">Instrucciones</h2>
+            <p class="text-muted-2 mb-1">Completa las secciones con la mayor precisión posible. Los campos marcados con <span class="text-danger">*</span> son obligatorios.</p>
+            <ul class="text-muted-2">
+              <li>La barra de progreso aumenta conforme completas campos clave.</li>
+              <li>Puedes <strong>guardar</strong> un borrador local y continuar después.</li>
+              
+            </ul>
+            
+            <div class="border rounded p-3">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-shield-lock"></i>
+                <strong>Privacidad</strong>
+              </div>
+              <p class="text-muted-2 mb-0">Este formulario es propiedad de <b>Disueña Digital Strategy</b>. Toda la información contenida se maneja de manera confidencial y únicamente informativa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de resultado -->
+  <div class="modal fade" id="resultadoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-clipboard-check me-2"></i>Resumen de envío</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <pre id="resultadoJSON" class="mb-0" style="white-space: pre-wrap"></pre>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const form = document.getElementById('diagnosticForm');
+    const progressBar = document.getElementById('progressBar');
+
+    // Sincronización de % ventas digitales
+    const ventasRange = document.getElementById('ventasDigitales');
+    const ventasNum = document.getElementById('ventasDigitalesNum');
+    ventasRange.addEventListener('input', () => ventasNum.value = ventasRange.value);
+    ventasNum.addEventListener('input', () => {
+      let v = Math.min(100, Math.max(0, Number(ventasNum.value||0)));
+      ventasNum.value = v; ventasRange.value = v;
+    });
+
+    // Mostrar/ocultar bloques según respuestas
+    const invierteAds = document.getElementById('invierteAds');
+    const adsBlock = document.getElementById('adsBlock');
+    invierteAds.addEventListener('change', () => {
+      if (invierteAds.value === 'Sí') new bootstrap.Collapse(adsBlock, {show: true});
+      else new bootstrap.Collapse(adsBlock, {hide: true});
+    });
+
+    const presupuesto = document.getElementById('presupuesto');
+    const presupuestoDetalle = document.getElementById('presupuestoDetalle');
+    presupuesto.addEventListener('change', () => {
+      if (presupuesto.value === 'Sí') new bootstrap.Collapse(presupuestoDetalle, {show: true});
+      else new bootstrap.Collapse(presupuestoDetalle, {hide: true});
+    });
+
+    // Validación de distribución 100%
+    const distInputs = document.querySelectorAll('.dist');
+    const distAlert = document.getElementById('distAlert');
+    function validarDistribucion(){
+      const total = Array.from(distInputs).reduce((acc,el)=>acc + (Number(el.value)||0), 0);
+      const ok = total === 0 || Math.abs(total - 100) < 0.0001; // permitir vacío o 100%
+      distAlert.classList.toggle('d-none', ok);
+      return ok;
+    }
+    distInputs.forEach(i=> i.addEventListener('input', validarDistribucion));
+
+    // Progreso según campos obligatorios + algunos clave
+    const camposClave = [
+      '#empresa','#nombre','#email','#descripcionModelo','input[name="tipoCliente"]',
+      '#estrategiaContenidos','#invierteAds','#presupuesto','#freqKpi','#reportes'
+    ];
+    function calcularProgreso(){
+      const total = camposClave.length;
+      let completos = 0;
+      camposClave.forEach(sel => {
+        const nodes = form.querySelectorAll(sel);
+        if(!nodes.length) return;
+        if(nodes[0].type === 'radio'){
+          const name = nodes[0].name;
+          if(form.querySelector(`input[name="${name}"]:checked`)) completos++;
+        } else {
+          nodes.forEach(n=>{ if(n.value && n.value !== '') completos++; });
+        }
+      });
+      // Evitar sobre conteo de múltiples nodos
+      const radiosCount = 1; // para tipoCliente
+      const ajustado = completos - (form.querySelectorAll('input[name="tipoCliente"]').length - radiosCount);
+      const pct = Math.min(100, Math.round((ajustado/total)*100));
+      progressBar.style.width = pct + '%';
+      progressBar.setAttribute('aria-valuenow', pct);
+    }
+    form.addEventListener('input', calcularProgreso);
+    form.addEventListener('change', calcularProgreso);
+    calcularProgreso();
+
+    // Guardar/Limpiar/Exportar
+    const STORAGE_KEY = 'diagnosticoMarketingDraft';
+    document.getElementById('btnGuardar').addEventListener('click', () => {
+      const data = recolectarDatos();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      mostrarToast('Borrador guardado localmente.');
+    });
+    document.getElementById('btnLimpiar').addEventListener('click', () => {
+      form.reset();
+      new bootstrap.Collapse(adsBlock, {hide:true});
+      new bootstrap.Collapse(presupuestoDetalle, {hide:true});
+      calcularProgreso();
+      validarDistribucion();
+    });
+    document.getElementById('btnExport').addEventListener('click', () => {
+      const data = recolectarDatos();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'diagnostico_marketing.json'; a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Cargar borrador al iniciar
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if(saved){
+        try { rellenarFormulario(JSON.parse(saved)); calcularProgreso(); validarDistribucion(); } catch(e){}
+      }
+    });
+
+    function recolectarDatos(){
+      const data = Object.fromEntries(new FormData(form).entries());
+      // Multi-select y checkboxes múltiples
+      data.canales = obtenerChecks('canales');
+      data.procesos = obtenerChecks('procesos');
+      data.herramientas = obtenerChecks('herramientas');
+      data.kpis = obtenerChecks('kpis');
+      data.plataformasAds = obtenerMulti('#plataformasAds');
+      // Distribución
+      data.distribucion = {
+        publicidad: num('#distAds'), contenido: num('#distContenido'),
+        herramientas: num('#distHerr'), equipo: num('#distEquipo')
+      };
+      // Conversión de números seguros
+      data.ventasDigitales = num('#ventasDigitales');
+      data.satisfaccion = num('#satisfaccion');
+      data.nivelDigital = num('#nivelDigital');
+      data.claridadKpi = num('#claridadKpi');
+      data.ticketPromedio = num('#ticketPromedio');
+      data.inversionMensual = num('#inversionMensual');
+      data.roas = num('#roas');
+      data.cac = num('#cac');
+      data.ltv = num('#ltv');
+      data.porcentajeIngresos = num('#porcentajeIngresos');
+      data.margenBruto = num('#margenBruto');
+      return data;
+    }
+    function num(sel){ const v = document.querySelector(sel)?.value; return v? Number(v): null; }
+    function obtenerChecks(name){ return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map(el=>el.value); }
+    function obtenerMulti(sel){ return Array.from(form.querySelector(sel)?.selectedOptions||[]).map(o=>o.value); }
+
+    function rellenarFormulario(data){
+      for (const [k,v] of Object.entries(data)){
+        const el = form.elements[k];
+        if(!el) continue;
+        if(el instanceof RadioNodeList){
+          const r = form.querySelector(`[name="${k}"][value="${v}"]`);
+          if(r) r.checked = true;
+        } else if (el instanceof HTMLSelectElement || el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+          if(Array.isArray(v)){
+            // multi-select
+            Array.from(el.options||[]).forEach(opt=> opt.selected = v.includes(opt.value));
+          } else {
+            el.value = (v ?? '').toString();
+          }
+        }
+      }
+      // Checks múltiples
+      (data.canales||[]).forEach(val=>{ const c = form.querySelector(`input[name="canales"][value="${val}"]`); if(c) c.checked = true; });
+      (data.procesos||[]).forEach(val=>{ const c = form.querySelector(`input[name="procesos"][value="${val}"]`); if(c) c.checked = true; });
+      (data.herramientas||[]).forEach(val=>{ const c = form.querySelector(`input[name="herramientas"][value="${val}"]`); if(c) c.checked = true; });
+      (data.kpis||[]).forEach(val=>{ const c = form.querySelector(`input[name="kpis"][value="${val}"]`); if(c) c.checked = true; });
+      // Mostrar bloques condicionales
+      if(data.invierteAds === 'Sí') new bootstrap.Collapse(adsBlock, {show:true});
+      if(data.presupuesto === 'Sí') new bootstrap.Collapse(presupuestoDetalle, {show:true});
+    }
+
+    // Envío con validación
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      const distOk = validarDistribucion();
+      if(!form.checkValidity() || !distOk){
+        form.classList.add('was-validated');
+        calcularProgreso();
+        return;
+      }
+      const data = recolectarDatos();
+      // Aquí podrías hacer fetch a tu API
+      // fetch('/api/diagnostico', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)})
+      document.getElementById('resultadoJSON').textContent = JSON.stringify(data, null, 2);
+      const modal = new bootstrap.Modal('#resultadoModal');
+      modal.show();
+    });
+
+    // Toast simple
+    function mostrarToast(msg){
+      const el = document.createElement('div');
+      el.className = 'toast align-items-center text-bg-dark border-0 show position-fixed bottom-0 end-0 m-3';
+      el.setAttribute('role','alert');
+      el.innerHTML = `<div class="d-flex"><div class="toast-body">${msg}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>`;
+      document.body.appendChild(el);
+      setTimeout(()=> el.remove(), 3000);
+    }
+  </script>
+</body>
+</html>
