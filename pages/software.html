@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Custom Software Development — PHP & PERN Stack</title>
+  <meta name="description" content="Custom software development in PHP and PERN stack. Scalable platforms, automation, dashboards, integrations and PWA. Contact via WhatsApp or schedule a strategy call.">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts (optional; fast) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card-bg: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.05);
+      --accent1: #00d4ff; /* electric cyan */
+      --accent2: #8a2be2; /* neon purple */
+      --muted: rgba(255,255,255,0.65);
+      --glass-2: rgba(255,255,255,0.03);
+    }
+    [data-theme="light"]{
+      --bg: #f8fbff;
+      --card-bg: rgba(255,255,255,0.85);
+      --glass: rgba(255,255,255,0.6);
+      --glass-2: rgba(0,0,0,0.04);
+      --accent1: #0165ff;
+      --accent2: #7b3fe4;
+      --muted: rgba(0,0,0,0.65);
+    }
+
+    html,body{
+      height:100%;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(138,43,226,0.06), transparent),
+                  radial-gradient(900px 500px at 90% 90%, rgba(0,212,255,0.04), transparent),
+                  var(--bg);
+      color: var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* container */
+    .container-narrow{max-width:1100px;}
+
+    /* glassmorphism cards */
+    .glass {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px) saturate(120%);
+      border-radius: 14px;
+      padding: 1.25rem;
+    }
+
+    /* hero */
+    .hero {
+      min-height: 76vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      padding-top:3.5rem;
+      padding-bottom:3.5rem;
+    }
+    .hero .eyebrow { font-weight:600; color:var(--accent1); letter-spacing:0.4px; }
+    .hero h1 { font-size: clamp(1.8rem, 2.6vw, 3rem); color: white; line-height:1.02; font-weight:800; }
+    .hero p.lead { font-size:1.02rem; color:var(--muted); margin-top:0.6rem; margin-bottom:1.1rem; }
+
+    /* neon accent underline */
+    .accent-underline{
+      display:inline-block;
+      position:relative;
+    }
+    .accent-underline::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      height:6px;
+      width:100%;
+      border-radius:6px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      opacity:0.9;
+      transform-origin:left;
+      transform:scaleX(0.95);
+      filter:blur(6px);
+    }
+
+    /* features */
+    .feature-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      border-radius:12px;
+      padding:1.15rem;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .feature-card:hover{ transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+
+    /* timeline */
+    .timeline-step{
+      position:relative;
+      padding-left:3rem;
+      margin-bottom:1.25rem;
+    }
+    .timeline-step::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:6px;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background: linear-gradient(135deg,var(--accent1),var(--accent2));
+      box-shadow:0 6px 16px rgba(0,0,0,0.35);
+    }
+
+    /* CTA styles */
+    .btn-accent{
+      background: linear-gradient(90deg,var(--accent1),var(--accent2));
+      color: #fff;
+      border: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      padding: .85rem 1.15rem;
+      border-radius: 10px;
+      font-weight:700;
+      transition: transform .15s ease;
+    }
+    .btn-accent-out{
+      color: #fff;
+      background: linear-gradient(#222, #222), linear-gradient(90deg,var(--accent1),var(--accent2));
+      background-origin: padding-box, border-box;
+      background-repeat: no-repeat; /* this is important */
+      border: 3px solid transparent;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      border-radius: 5px;
+      font-weight:700;
+      transition: transform .15s ease;
+    }
+    .btn-accent:active{ transform: translateY(1px); }
+
+    /* floating controls */
+    .floating-controls{
+      position:fixed;
+      top:18px;
+      right:18px;
+      z-index:1050;
+      display:flex;
+      gap:.5rem;
+      align-items:center;
+    }
+    .floating-controls .btn {
+      border-radius:999px;
+      width:44px;
+      height:44px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    /* language button style */
+    .lang-btn {
+      min-width:110px;
+      border-radius:999px;
+      padding: .4rem .65rem;
+      display:inline-flex;
+      gap:.5rem;
+      align-items:center;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    /* footer */
+    footer { padding:2.25rem 0; color:var(--muted); }
+    .muted-small { color:var(--muted); font-size:.95rem; }
+
+    /* responsive spacing */
+    @media (max-width: 768px){
+      .hero { padding-top:2.5rem; padding-bottom:2.5rem; }
+      .floating-controls { right:12px; top:12px; gap:.4rem; }
+    }
+
+    /* subtle reveal animations */
+    .reveal{ opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible{ opacity:1; transform:none; }
+
+    /* small decorative gradient shapes */
+    .decor-circle{
+      position:absolute;
+      border-radius:50%;
+      filter: blur(80px) saturate(140%);
+      opacity:0.55;
+      pointer-events:none;
+    }
+    .decor-1{ width:420px; height:420px; right:-120px; top:-80px; background: linear-gradient(120deg,var(--accent2), transparent 60%); }
+    .decor-2{ width:340px; height:340px; left:-120px; bottom:-80px; background: linear-gradient(120deg,var(--accent1), transparent 60%); }
+
+  </style>
+</head>
+<body>
+  <!-- Floating controls: Dark mode + Language -->
+  <div class="floating-controls">
+    <button id="theme-toggle" class="btn btn-light" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+    <div class="lang-btn" id="lang-switch" role="button" tabindex="0" aria-label="Switch language">
+      <span id="current-lang">EN</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="opacity:.9">
+        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <span id="lang-label" style="opacity:.9">Español</span>
+    </div>
+  </div>
+
+  <header class="py-3">
+    <nav class="container container-narrow d-flex align-items-center justify-content-between">
+      <a class="d-flex align-items-center gap-2 text-decoration-none" href="#" aria-label="Home">
+        <!-- Placeholder logo -->
+        <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 6px 18px rgba(0,0,0,0.25); display: flex; justify-content: center; align-items: center"><img style="width: 40px; height: 40px;" src="../assets/logos/Disuena-iso.ico" alt=""></div>
+        <div>
+          <div style="font-weight:800;color:var(--muted);">Disueña Software Development</div>
+          <small class="muted-small">Custom PHP & PERN Solutions</small>
+        </div>
+      </a>
+      <div class="d-flex gap-3 align-items-center">
+        <a id="nav-cta" class="btn btn-accent-out" href="https://calendly.com/lmdiaz123/strategycall" target="_blank" rel="noopener" data-i18n="nav_cta">Schedule</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main class="hero">
+    <div class="decor-circle decor-1"></div>
+    <div class="decor-circle decor-2"></div>
+
+    <div class="container ">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <div class="eyebrow reveal" data-delay="0.05" data-i18n="hero_eyebrow">Custom Software · PHP & PERN</div>
+          <h1 class="reveal" data-delay="0.12">
+            <span class="accent-underline" data-i18n="hero_title">We build tailored software that powers growth</span>
+          </h1>
+          <p class="lead reveal" data-delay="0.18" data-i18n="hero_subtitle">
+            Scalable web platforms, automation, dashboards and integrations crafted with performance and UX in mind.
+          </p>
+
+          <div class="d-flex gap-3 align-items-center flex-wrap reveal" data-delay="0.24">
+            <a class="btn btn-accent" href="https://calendly.com/lmdiaz123/strategycall" target="_blank" rel="noopener" data-i18n="cta_schedule">Schedule Strategy Call</a>
+            <a class="btn btn-outline-light" href="https://wa.me/525555036024" target="_blank" rel="noopener" data-i18n="cta_whatsapp">Talk on WhatsApp</a>
+            <small class="muted-small ms-2" data-i18n="hero_trust_note">High-ticket, enterprise-grade delivery.</small>
+          </div>
+
+          <div class="mt-4 reveal" data-delay="0.32">
+            <div class="glass d-flex gap-3 align-items-center">
+              <div style="width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">25+</div>
+              <div>
+                <div style="font-weight:700;color:var(--muted);" data-i18n="hero_experience_title">25+ years combined experience</div>
+                <div class="muted-small" data-i18n="hero_experience_sub">Automation · Integration · Scalable Platforms</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-5">
+          <!-- Mockup card / demo -->
+          <div class="glass p-3 reveal" data-delay="0.28" style="min-height:260px; display:flex;flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong style="color:white">Project Snapshot</strong>
+              </div>
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active ">
+                        <p>Tablero de control hospital</p>
+                        <img src="../assets/images/software/Tablero-Hospital.png" class="d-block rounded w-100" alt="Tablero de Control para Hospital con reportes y métricas generales y particulares">
+                      </div>
+                      <div class="carousel-item">
+                        <p>Control video vigilancia</p>
+                        <img src="../assets/images/software/Video-Vigilancia.png" class="d-block rounded w-100" alt="Sistema de video Vigilancia para control de personal">
+                      </div>
+                      <div class="carousel-item">
+                        <p>Plataforma taxi seguro (Tipo UBER)</p>
+                        <img src="../assets/images/software/Taxi-Seguro.png" class="d-block rounded w-100" alt="Plataforma Taxi Seguro (Tipo UBER), funcionalidad de App.">
+                      </div>
+                      <div class="carousel-item">
+                        <p>Plataforma de monitoreo de tanques de gas en tiempo real</p>
+                        <img src="../assets/images/software/Monitoreo-Tanques.png" class="d-block rounded w-100" alt="Plataforma de monitoreo de tanques de gas en tiempo real">
+                      </div>
+                      <div class="carousel-item">
+                        <p>Plataforma de fidelización</p>
+                        <img src="../assets/images/software/Plataforma-Fidelizacion.png" class="d-block rounded w-100" alt="Plataforma de fidelización para empresas">
+                      </div>
+                      <div class="carousel-item">
+                        <p>Catálogo digital con filtros dinámicos</p>
+                        <img src="../assets/images/software/Catalogo-Comercial.png" class="d-block rounded w-100" alt="Catalogo Digital de productos y servicios Sociales">
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                       <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+              <a class="btn btn-sm btn-accent w-100" href="https://calendly.com/lmdiaz123/strategycall" target="_blank" rel="noopener" data-i18n="cta_micro_schedule">Book</a>
+              <a class="btn btn-sm btn-outline-light" href="https://wa.me/525555036024" target="_blank" rel="noopener" data-i18n="cta_micro_whatsapp">WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FEATURES -->
+  <section class="py-5">
+    <div class="container container-narrow">
+      <div class="row align-items-center mb-4">
+        <div class="col-md-8">
+          <h3 class="reveal" data-delay="0.05" data-i18n="what_title">What we build</h3>
+          <p class="muted-small reveal" data-delay="0.09" data-i18n="what_sub">
+            From data-heavy dashboards to customer-facing platforms — we deliver production-ready solutions aligned to business metrics.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4 reveal" data-delay="0.12">
+          <div class="feature-card">
+            <h5>Custom Web Platforms</h5>
+            <p class="muted-small" data-i18n="feat_1">Tailored UX and robust backends in PHP or PERN.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal" data-delay="0.16">
+          <div class="feature-card">
+            <h5>Process Automation</h5>
+            <p class="muted-small" data-i18n="feat_2">Automate business flows, reporting and integrations.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal" data-delay="0.20">
+          <div class="feature-card">
+            <h5>Dashboards & BI</h5>
+            <p class="muted-small" data-i18n="feat_3">Real-time dashboards with filtering and drill-downs.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal" data-delay="0.24">
+          <div class="feature-card">
+            <h5>PWA & Mobile</h5>
+            <p class="muted-small" data-i18n="feat_4">Progressive Web Apps for offline-capable experiences.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal" data-delay="0.28">
+          <div class="feature-card">
+            <h5>API & Hardware Integration</h5>
+            <p class="muted-small" data-i18n="feat_5">Integrations with sensors, external systems and third-party APIs.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal" data-delay="0.32">
+          <div class="feature-card">
+            <h5>Cloud & Infra</h5>
+            <p class="muted-small" data-i18n="feat_6">Scalable deployments, CI/CD and monitoring.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY / TIMELINE -->
+  <section class="py-5 bg-glass" id="how">
+    <div class="container container-narrow">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h3 class="reveal" data-delay="0.05" data-i18n="how_title">How we work</h3>
+          <p class="muted-small reveal" data-delay="0.09" data-i18n="how_sub">A clear, collaborative process that minimizes uncertainty and speeds up ROI.</p>
+
+          <div class="mt-4">
+            <div class="timeline-step reveal" data-delay="0.14">
+              <strong data-i18n="step_1_title">1. Discovery</strong>
+              <div class="muted-small" data-i18n="step_1_desc">We map your processes and define success metrics.</div>
+            </div>
+            <div class="timeline-step reveal" data-delay="0.18">
+              <strong data-i18n="step_2_title">2. Architecture</strong>
+              <div class="muted-small" data-i18n="step_2_desc">Optimal stack, integrations and security design.</div>
+            </div>
+            <div class="timeline-step reveal" data-delay="0.22">
+              <strong data-i18n="step_3_title">3. Agile Development</strong>
+              <div class="muted-small" data-i18n="step_3_desc">Iterative sprints with consistent demos.</div>
+            </div>
+            <div class="timeline-step reveal" data-delay="0.26">
+              <strong data-i18n="step_4_title">4. Continuous Optimization</strong>
+              <div class="muted-small" data-i18n="step_4_desc">Monitoring, maintenance and performance tuning.</div>
+            </div>
+          </div>
+
+          <!-- middle CTA -->
+          <div class="mt-4 reveal" data-delay="0.32">
+            <a class="btn btn-accent" href="https://wa.me/525555036024" target="_blank" rel="noopener" data-i18n="mid_cta_whatsapp">Contact via WhatsApp</a>
+            <a class="btn btn-outline-light ms-2" href="https://calendly.com/lmdiaz123/strategycall" target="_blank" rel="noopener" data-i18n="mid_cta_calendly">Schedule a Call</a>
+          </div>
+
+        </div>
+
+        <div class="col-md-6">
+          <div class="glass reveal" data-delay="0.18">
+            <h5 data-i18n="case_title">Selected Case Examples</h5>
+            <p class="muted-small" data-i18n="case_sub">Real projects that demonstrate scale and impact.</p>
+            <ul class="mt-3">
+              <li class="muted-small" data-i18n="case_1">Real-time tank monitoring and alerts</li>
+              <li class="muted-small" data-i18n="case_2">Interactive dashboards for election results</li>
+              <li class="muted-small" data-i18n="case_3">PWA for field data capture</li>
+              <li class="muted-small" data-i18n="case_4">Fleet tracking and telemetry</li>
+            </ul>
+            <div class="mt-3 muted-small" data-i18n="cv_note">Based on portfolio & CV experience.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="py-5">
+    <div class="container container-narrow">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6 reveal" data-delay="0.08">
+          <div class="glass">
+            <h4 data-i18n="why_title">Why choose us</h4>
+            <p class="muted-small" data-i18n="why_sub">We blend design, engineering and automation to deliver measurable outcomes.</p>
+            <ul class="mt-3">
+              <li class="muted-small" data-i18n="why_1">Fast response & transparent timeline</li>
+              <li class="muted-small" data-i18n="why_2">Complex integrations made simple</li>
+              <li class="muted-small" data-i18n="why_3">UX-first approach</li>
+              <li class="muted-small" data-i18n="why_4">Enterprise-grade scalability</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 reveal" data-delay="0.12">
+          <div class="glass" style="height:100%;">
+            <h5 data-i18n="tech_stack_title">Core Technologies</h5>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <span class="badge bg-transparent border" style="border-color:rgba(255,255,255,0.06); color:var(--muted)">PHP</span>
+              <span class="badge bg-transparent border" style="border-color:rgba(255,255,255,0.06); color:var(--muted)">Node.js</span>
+              <span class="badge bg-transparent border" style="border-color:rgba(255,255,255,0.06); color:var(--muted)">Express</span>
+              <span class="badge bg-transparent border" style="border-color:rgba(255,255,255,0.06); color:var(--muted)">React</span>
+              <span class="badge bg-transparent border" style="border-color:rgba(255,255,255,0.06); color:var(--muted)">PostgreSQL</span>
+              <span class="badge bg-transparent border" style="border-color:rgba(255,255,255,0.06); color:var(--muted)">PWA</span>
+              <span class="badge bg-transparent border" style="border-color:rgba(255,255,255,0.06); color:var(--muted)">CI/CD</span>
+            </div>
+            <div class="mt-3 muted-small" data-i18n="tech_note">Custom stacks selected per project requirements.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST / CLIENTS -->
+  <section class="py-5">
+    <div class="container container-narrow text-center">
+      <h5 class="reveal" data-delay="0.08" data-i18n="clients_title">Industries & clients</h5>
+      <p class="muted-small reveal" data-delay="0.12" data-i18n="clients_sub">Government · Energy · Education · Tourism · Logistics · Retail</p>
+      <div class="d-flex flex-wrap justify-content-center gap-3 mt-4 reveal" data-delay="0.16">
+        <!-- placeholder client logos -->
+        <div style="width:120px;height:44px;background:rgba(255,255,255,0.02);border-radius:8px;display:flex;align-items:center;justify-content:center">Client A</div>
+        <div style="width:120px;height:44px;background:rgba(255,255,255,0.02);border-radius:8px;display:flex;align-items:center;justify-content:center">Client B</div>
+        <div style="width:120px;height:44px;background:rgba(255,255,255,0.02);border-radius:8px;display:flex;align-items:center;justify-content:center">Client C</div>
+        <div style="width:120px;height:44px;background:rgba(255,255,255,0.02);border-radius:8px;display:flex;align-items:center;justify-content:center">Client D</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-5">
+    <div class="container container-narrow">
+      <div class="glass text-center p-4 reveal" data-delay="0.08">
+        <h3 data-i18n="final_title">Your next platform starts with one conversation</h3>
+        <p class="muted-small" data-i18n="final_sub">High-ticket projects handled end-to-end — from discovery to monitoring.</p>
+        <div class="d-flex gap-3 justify-content-center mt-3">
+          <a class="btn btn-accent" href="https://calendly.com/lmdiaz123/strategycall" target="_blank" rel="noopener" data-i18n="final_cta_calendly">Schedule a Strategy Call</a>
+          <a class="btn btn-outline-light" href="https://wa.me/525555036024" target="_blank" rel="noopener" data-i18n="final_cta_whatsapp">Start on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container container-narrow d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div>
+        <strong style="color:var(--muted);">LMD Software</strong>
+        <div class="muted-small">Custom PHP & PERN development — Mexico</div>
+      </div>
+      <div class="mt-3 mt-md-0 d-flex gap-3 align-items-center">
+        <a href="mailto:hello@lmd.software" class="text-decoration-none muted-small">hello@lmd.software</a>
+        <a href="tel:+525555036024" class="text-decoration-none muted-small">+52 55 5503 6024</a>
+        <a class="btn btn-sm btn-accent" href="https://calendly.com/lmdiaz123/strategycall" target="_blank" rel="noopener" data-i18n="footer_cta">Book a Call</a>
+      </div>
+    </div>
+    <div class="container container-narrow text-center mt-3 muted-small">© <span id="year"></span> LMD Software · Privacy · Terms</div>
+  </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ---------- Config ----------
+    const CALENDLY = "https://calendly.com/lmdiaz123/strategycall";
+    const WHATSAPP = "https://wa.me/525555036024";
+
+    // ---------- Simple reveal on scroll ----------
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+      // reveal elements
+      const reveals = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      reveals.forEach(el => revealObserver.observe(el));
+
+      // initialize theme and language
+      initTheme();
+      initLanguageControls();
+    });
+
+    // ---------- THEME (dark/light) ----------
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    function initTheme(){
+      const saved = localStorage.getItem('site-theme');
+      if(saved){
+        document.documentElement.setAttribute('data-theme', saved);
+        updateThemeIcon(saved);
+      } else {
+        // prefer dark for this design
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const defaultTheme = prefersDark ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', defaultTheme);
+        updateThemeIcon(defaultTheme);
+      }
+    }
+    function updateThemeIcon(theme){
+      if(theme === 'light'){
+        themeToggleBtn.textContent = '☀️';
+        themeToggleBtn.setAttribute('aria-pressed', 'false');
+      } else {
+        themeToggleBtn.textContent = '🌙';
+        themeToggleBtn.setAttribute('aria-pressed', 'true');
+      }
+    }
+    themeToggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('site-theme', next);
+      updateThemeIcon(next);
+      // animate a little
+      themeToggleBtn.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }], { duration: 420, easing: 'ease-out' });
+    });
+
+    // ---------- LANGUAGE (EN / ES) ----------
+    const i18n = {
+      "en": {
+        "nav_cta": "Schedule",
+        "hero_eyebrow": "Custom Software · PHP & PERN",
+        "hero_title": "We build tailored software that powers growth",
+        "hero_subtitle": "Scalable web platforms, automation, dashboards and integrations crafted with performance and UX in mind.",
+        "cta_schedule": "Schedule Strategy Call",
+        "cta_whatsapp": "Talk on WhatsApp",
+        "hero_trust_note": "High-ticket, enterprise-grade delivery.",
+        "hero_experience_title": "25+ years combined experience",
+        "hero_experience_sub": "Automation · Integration · Scalable Platforms",
+        "hero_demo_label": "Demo",
+        "cta_micro_schedule": "Book",
+        "cta_micro_whatsapp": "WhatsApp",
+
+        "what_title": "What we build",
+        "what_sub": "From data-heavy dashboards to customer-facing platforms — we deliver production-ready solutions aligned to business metrics.",
+        "feat_1": "Tailored UX and robust backends in PHP or PERN.",
+        "feat_2": "Automate business flows, reporting and integrations.",
+        "feat_3": "Real-time dashboards with filtering and drill-downs.",
+        "feat_4": "Progressive Web Apps for offline-capable experiences.",
+        "feat_5": "Integrations with sensors, external systems and third-party APIs.",
+        "feat_6": "Scalable deployments, CI/CD and monitoring.",
+
+        "how_title": "How we work",
+        "how_sub": "A clear, collaborative process that minimizes uncertainty and speeds up ROI.",
+        "step_1_title": "1. Discovery",
+        "step_1_desc": "We map your processes and define success metrics.",
+        "step_2_title": "2. Architecture",
+        "step_2_desc": "Optimal stack, integrations and security design.",
+        "step_3_title": "3. Agile Development",
+        "step_3_desc": "Iterative sprints with consistent demos.",
+        "step_4_title": "4. Continuous Optimization",
+        "step_4_desc": "Monitoring, maintenance and performance tuning.",
+        "mid_cta_whatsapp": "Contact via WhatsApp",
+        "mid_cta_calendly": "Schedule a Call",
+
+        "case_title": "Selected Case Examples",
+        "case_sub": "Real projects that demonstrate scale and impact.",
+        "case_1": "Real-time tank monitoring and alerts",
+        "case_2": "Interactive dashboards for election results",
+        "case_3": "PWA for field data capture",
+        "case_4": "Fleet tracking and telemetry",
+        "cv_note": "Based on portfolio & CV experience.",
+
+        "why_title": "Why choose us",
+        "why_sub": "We blend design, engineering and automation to deliver measurable outcomes.",
+        "why_1": "Fast response & transparent timeline",
+        "why_2": "Complex integrations made simple",
+        "why_3": "UX-first approach",
+        "why_4": "Enterprise-grade scalability",
+        "tech_stack_title": "Core Technologies",
+        "tech_note": "Custom stacks selected per project requirements.",
+
+        "clients_title": "Industries & clients",
+        "clients_sub": "Government · Energy · Education · Tourism · Logistics · Retail",
+
+        "final_title": "Your next platform starts with one conversation",
+        "final_sub": "High-ticket projects handled end-to-end — from discovery to monitoring.",
+        "final_cta_calendly": "Schedule a Strategy Call",
+        "final_cta_whatsapp": "Start on WhatsApp",
+        "footer_cta": "Book a Call"
+      },
+      "es": {
+        "nav_cta": "Agendar",
+        "hero_eyebrow": "Software a la medida · PHP & PERN",
+        "hero_title": "Construimos software a la medida que impulsa tu negocio",
+        "hero_subtitle": "Plataformas escalables, automatización, dashboards e integraciones con foco en rendimiento y experiencia de usuario.",
+        "cta_schedule": "Agendar Sesión Estratégica",
+        "cta_whatsapp": "Hablar por WhatsApp",
+        "hero_trust_note": "Proyectos de alto valor con entrega profesional.",
+        "hero_experience_title": "25+ años de experiencia combinada",
+        "hero_experience_sub": "Automatización · Integración · Plataformas escalables",
+        "hero_demo_label": "Demo",
+        "cta_micro_schedule": "Reservar",
+        "cta_micro_whatsapp": "WhatsApp",
+
+        "what_title": "Qué desarrollamos",
+        "what_sub": "Desde dashboards de datos hasta plataformas para clientes — entregamos soluciones listas para producción alineadas a métricas de negocio.",
+        "feat_1": "UX a la medida y backends robustos en PHP o PERN.",
+        "feat_2": "Automatizamos flujos, reportes e integraciones.",
+        "feat_3": "Dashboards en tiempo real con filtros y drill-down.",
+        "feat_4": "PWA para experiencias con soporte offline.",
+        "feat_5": "Integraciones con sensores, sistemas externos y APIs.",
+        "feat_6": "Despliegues escalables, CI/CD y monitoreo.",
+
+        "how_title": "Cómo trabajamos",
+        "how_sub": "Proceso claro y colaborativo que reduce incertidumbre y acelera el ROI.",
+        "step_1_title": "1. Diagnóstico",
+        "step_1_desc": "Mapeamos tus procesos y definimos métricas de éxito.",
+        "step_2_title": "2. Arquitectura",
+        "step_2_desc": "Stack óptimo, integraciones y diseño de seguridad.",
+        "step_3_title": "3. Desarrollo Ágil",
+        "step_3_desc": "Sprints iterativos con demos constantes.",
+        "step_4_title": "4. Optimización Continua",
+        "step_4_desc": "Monitoreo, mantenimiento y afinación de rendimiento.",
+        "mid_cta_whatsapp": "Contactar por WhatsApp",
+        "mid_cta_calendly": "Agendar Llamada",
+
+        "case_title": "Casos de proyecto seleccionados",
+        "case_sub": "Proyectos reales que demuestran escala e impacto.",
+        "case_1": "Monitoreo de tanques en tiempo real y alertas",
+        "case_2": "Dashboards interactivos para resultados electorales",
+        "case_3": "PWA para captura de campo",
+        "case_4": "Rastreo de flota y telemetría",
+        "cv_note": "Basado en portafolio y CV.",
+
+        "why_title": "Por qué elegirnos",
+        "why_sub": "Combinamos diseño, ingeniería y automatización para entregar resultados cuantificables.",
+        "why_1": "Respuesta rápida y cronograma transparente",
+        "why_2": "Integraciones complejas simplificadas",
+        "why_3": "Enfoque centrado en UX",
+        "why_4": "Escalabilidad empresarial",
+        "tech_stack_title": "Tecnologías",
+        "tech_note": "Stacks personalizados según requerimientos del proyecto.",
+
+        "clients_title": "Industrias y clientes",
+        "clients_sub": "Gobierno · Energía · Educación · Turismo · Logística · Retail",
+
+        "final_title": "Tu próxima plataforma empieza con una conversación",
+        "final_sub": "Proyectos de alto valor gestionados end-to-end — desde diagnóstico hasta monitoreo.",
+        "final_cta_calendly": "Agendar Sesión Estratégica",
+        "final_cta_whatsapp": "Iniciar por WhatsApp",
+        "footer_cta": "Agendar Llamada"
+      }
+    };
+
+    function initLanguageControls(){
+      const langSwitch = document.getElementById('lang-switch');
+      const currentLangSpan = document.getElementById('current-lang');
+      const langLabel = document.getElementById('lang-label');
+      const savedLang = localStorage.getItem('site-lang') || 'en';
+      setLanguage(savedLang);
+
+      langSwitch.addEventListener('click', () => {
+        const next = (localStorage.getItem('site-lang') || 'en') === 'en' ? 'es' : 'en';
+        setLanguage(next);
+      });
+      langSwitch.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          langSwitch.click();
+        }
+      });
+
+      function setLanguage(code){
+        localStorage.setItem('site-lang', code);
+        currentLangSpan.textContent = code.toUpperCase();
+        langLabel.textContent = code === 'en' ? 'Español' : 'English';
+        // translate all elements with data-i18n
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if(i18n[code] && i18n[code][key]){
+            el.textContent = i18n[code][key];
+          }
+        });
+        // update nav CTA hrefs if needed (keeps same links but could be localized)
+      }
+    }
+
+    // ---------- Small accessibility: keyboard shortcut L for language, T for theme ----------
+    document.addEventListener('keydown', (e) => {
+      if(e.key.toLowerCase() === 'l' && (e.ctrlKey || e.metaKey)) {
+        // toggle language
+        const next = (localStorage.getItem('site-lang') || 'en') === 'en' ? 'es' : 'en';
+        localStorage.setItem('site-lang', next);
+        location.reload(); // simple quick way to apply (we could call setLanguage but reload keeps consistent)
+      }
+      if(e.key.toLowerCase() === 't' && (e.ctrlKey || e.metaKey)) {
+        themeToggleBtn.click();
+      }
+    });
+
+    // Accessibility hint: show initial accessible labels based on saved lang
+    (function applyInitialLangToButtons(){
+      const saved = localStorage.getItem('site-lang') || 'en';
+      document.getElementById('current-lang').textContent = saved.toUpperCase();
+      document.getElementById('lang-label').textContent = saved === 'en' ? 'Español' : 'English';
+    })();
+
+  </script>
+</body>
+</html>
