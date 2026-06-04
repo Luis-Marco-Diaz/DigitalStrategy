@@ -16,8 +16,6 @@
   src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js"
   type="module"
 ></script>
-
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CT1H42FNXD"></script>
   <script>
@@ -26,7 +24,6 @@
     gtag('js', new Date());
     gtag('config', 'G-CT1H42FNXD');
   </script>
-
   <style>
     :root{
       --bg: #0f1724;
@@ -215,7 +212,7 @@
       /* hide desktop floating controls on mobile */
       .floating-controls{ display:none; }
       /* show nav controls on mobile */
-      .nav-floating-controls{ display:flex; }
+      .nav-floating-controls{ display:flex; flex-direction: column; }
     }
 
     /* subtle reveal animations */
@@ -253,14 +250,14 @@
   </div>
 
   <header class="py-3">
-    <nav class="container container-narrow d-flex align-items-center justify-content-between">
+    <nav class="container container-narrow d-flex align-items-center justify-content-between ">
       <a class="d-flex align-items-center gap-2 text-decoration-none" href="#" aria-label="Home">
         <!-- Placeholder logo -->
         <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 6px 18px rgba(0,0,0,0.25); display: flex; justify-content: center; align-items: center">
           <img style="width: 40px; height: 40px;" src="../assets/logos/Disuena-iso.ico" alt="">
         </div>
         <div>
-          <div style="font-weight:800;color:var(--muted);">Disueña Software Development</div>
+          <div style="font-weight:800;color:var(--muted); margin: 0px 5px ; ">Disueña Software Development</div>
           <small class="muted-small">Custom PHP & PERN Solutions</small>
         </div>
       </a>
